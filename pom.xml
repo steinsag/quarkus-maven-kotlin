@@ -15,7 +15,7 @@
         <kotlin.version>1.7.20</kotlin.version>
 
         <!-- Maven plugins -->
-        <compiler-plugin.version>3.8.1</compiler-plugin.version>
+        <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
         <ktlint.maven.plugin.version>1.15.2</ktlint.maven.plugin.version>
 
