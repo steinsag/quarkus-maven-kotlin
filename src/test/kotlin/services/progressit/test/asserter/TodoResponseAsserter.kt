@@ -2,6 +2,7 @@ package services.progressit.test.asserter
 
 import io.restassured.http.ContentType.JSON
 import io.restassured.response.ValidatableResponse
+import org.hamcrest.Matchers.endsWith
 import org.hamcrest.core.Is.`is`
 import services.progressit.test.TODO_1_DEADLINE_STRING
 import services.progressit.test.TODO_1_DESCRIPTION
@@ -9,6 +10,7 @@ import services.progressit.test.TODO_1_TITLE
 import services.progressit.test.TODO_2_DEADLINE_STRING
 import services.progressit.test.TODO_2_DESCRIPTION
 import services.progressit.test.TODO_2_TITLE
+import services.progressit.test.TODO_BASE_PATH
 
 object TodoResponseAsserter {
 
@@ -30,5 +32,11 @@ object TodoResponseAsserter {
             .statusCode(200)
             .contentType(JSON)
             .body("$.size()", `is`(0))
+    }
+
+    fun assertCreateResponse(actualResponse: ValidatableResponse, expectedTodoId: String) {
+        actualResponse
+            .statusCode(201)
+            .header("LOCATION", endsWith("/$TODO_BASE_PATH/$expectedTodoId"))
     }
 }
