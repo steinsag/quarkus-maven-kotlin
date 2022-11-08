@@ -10,7 +10,7 @@ import javax.transaction.Transactional
 class TodoService {
 
     @Inject
-    lateinit var todoRepository: TodoRepository
+    protected lateinit var todoRepository: TodoRepository
 
     fun getAll() = emptyList<Todo>()
 

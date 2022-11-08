@@ -12,6 +12,9 @@ import services.progressit.test.TODO_2_DESCRIPTION
 import services.progressit.test.TODO_2_TITLE
 import services.progressit.test.TODO_BASE_PATH
 
+private const val HEADER_LOCATION = "LOCATION"
+private const val UUID_LENGTH = 36
+
 object TodoResponseAsserter {
 
     fun assertGetAllResponse(actualResponse: ValidatableResponse) {
@@ -37,6 +40,16 @@ object TodoResponseAsserter {
     fun assertCreateResponse(actualResponse: ValidatableResponse, expectedTodoId: String) {
         actualResponse
             .statusCode(201)
-            .header("LOCATION", endsWith("/$TODO_BASE_PATH/$expectedTodoId"))
+            .header(HEADER_LOCATION, endsWith("/$TODO_BASE_PATH/$expectedTodoId"))
     }
+
+    fun assertCreateResponse(actualResponse: ValidatableResponse) {
+        val actualTodoId = extractTodoId(actualResponse)
+        UuidAsserter.assertThat(actualTodoId).isUuid()
+
+        assertCreateResponse(actualResponse, actualTodoId)
+    }
+
+    fun extractTodoId(actualResponse: ValidatableResponse) =
+        actualResponse.extract().header(HEADER_LOCATION).takeLast(UUID_LENGTH)
 }

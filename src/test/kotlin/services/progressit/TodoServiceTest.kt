@@ -4,10 +4,9 @@ import io.quarkus.test.junit.QuarkusTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import services.progressit.domain.TodoService
-import services.progressit.domain.persistence.TodoRepository
-import services.progressit.test.TODO_1_DEADLINE
-import services.progressit.test.TODO_1_DESCRIPTION
-import services.progressit.test.TODO_1_TITLE
+import services.progressit.domain.model.Todo
+import services.progressit.test.asserter.DatabaseAsserter
+import services.progressit.test.asserter.UuidAsserter
 import services.progressit.test.createTodo1WithAttributesKnownInRequest
 import javax.inject.Inject
 
@@ -18,7 +17,7 @@ class TodoServiceTest {
     lateinit var todoService: TodoService
 
     @Inject
-    lateinit var todoRepository: TodoRepository
+    lateinit var databaseAsserter: DatabaseAsserter
 
     @Test
     fun `createTodo - valid todo - todo is persisted`() {
@@ -26,15 +25,14 @@ class TodoServiceTest {
 
         val actualTodo = todoService.create(givenTodo)
 
-        assertThat(actualTodo.id).isNotNull
-        assertThat(actualTodo).usingRecursiveComparison().ignoringFields("id").isEqualTo(givenTodo)
+        assertServiceResponse(actualTodo, givenTodo)
+        databaseAsserter.assertNumberOfTodos(1)
+        databaseAsserter.assertTodoEntity(actualTodo.id!!, createTodo1WithAttributesKnownInRequest())
+    }
 
-        assertThat(todoRepository.findAll().count()).isOne
-        val actualEntity = todoRepository.findById(actualTodo.id!!)
-        assertThat(actualEntity).isNotNull
-        assertThat(actualEntity!!.id).isEqualTo(actualTodo.id)
-        assertThat(actualEntity.title).isEqualTo(TODO_1_TITLE)
-        assertThat(actualEntity.description).isEqualTo(TODO_1_DESCRIPTION)
-        assertThat(actualEntity.deadline).isEqualTo(TODO_1_DEADLINE)
+    private fun assertServiceResponse(actualTodo: Todo, givenTodo: Todo) {
+        assertThat(actualTodo.id).isNotNull
+        UuidAsserter.assertThat(actualTodo.id).isUuid()
+        assertThat(actualTodo).usingRecursiveComparison().ignoringFields("id").isEqualTo(givenTodo)
     }
 }
