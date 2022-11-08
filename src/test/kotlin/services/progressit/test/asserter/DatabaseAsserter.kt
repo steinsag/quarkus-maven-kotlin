@@ -3,6 +3,7 @@ package services.progressit.test.asserter
 import org.assertj.core.api.Assertions.assertThat
 import services.progressit.domain.model.Todo
 import services.progressit.domain.persistence.TodoRepository
+import java.time.OffsetDateTime
 import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
 
@@ -24,6 +25,7 @@ class DatabaseAsserter {
         assertThat(actualTodo).isNotNull
         assertThat(actualTodo!!.id).isEqualTo(todoId)
         assertThat(actualTodo)
+            .usingComparatorForType(OffsetDateTimeComparator(), OffsetDateTime::class.java)
             .usingRecursiveComparison()
             .ignoringFieldsMatchingRegexes(HIBERNATE_ATTRIBUTES_IGNORE_PATTERN)
             .ignoringFields("id")
