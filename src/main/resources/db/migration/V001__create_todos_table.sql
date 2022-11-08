@@ -1,0 +1,6 @@
+CREATE TABLE todo (
+    id VARCHAR (36) PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    deadline TIMESTAMP WITH TIME ZONE NOT NULL
+);
