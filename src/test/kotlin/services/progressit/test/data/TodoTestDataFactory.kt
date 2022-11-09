@@ -1,4 +1,4 @@
-package services.progressit.test
+package services.progressit.test.data
 
 import services.progressit.domain.model.Todo
 import services.progressit.rest.dto.TodoDto

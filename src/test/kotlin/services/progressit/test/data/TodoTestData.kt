@@ -1,4 +1,4 @@
-package services.progressit.test
+package services.progressit.test.data
 
 import java.time.OffsetDateTime
 

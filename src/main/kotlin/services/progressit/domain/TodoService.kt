@@ -6,15 +6,15 @@ import javax.enterprise.context.ApplicationScoped
 import javax.inject.Inject
 import javax.transaction.Transactional
 
+@Transactional
 @ApplicationScoped
 class TodoService {
 
     @Inject
     protected lateinit var todoRepository: TodoRepository
 
-    fun getAll() = emptyList<Todo>()
+    fun getAll() = todoRepository.findAll().list()
 
-    @Transactional
     fun create(todo: Todo): Todo {
         todoRepository.persist(todo)
 

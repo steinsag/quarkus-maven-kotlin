@@ -1,17 +1,19 @@
-package services.progressit
+package services.progressit.domain
 
 import io.quarkus.test.junit.QuarkusTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import services.progressit.domain.TodoService
 import services.progressit.domain.model.Todo
+import services.progressit.test.CleanDatabaseAfterEach
 import services.progressit.test.asserter.DatabaseAsserter
 import services.progressit.test.asserter.UuidAsserter
-import services.progressit.test.createTodo1WithAttributesKnownInRequest
+import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
 import javax.inject.Inject
+import javax.transaction.Transactional
 
 @QuarkusTest
-class TodoServiceTest {
+@Transactional
+class TodoServiceTest : CleanDatabaseAfterEach() {
 
     @Inject
     lateinit var todoService: TodoService
@@ -34,5 +36,21 @@ class TodoServiceTest {
         assertThat(actualTodo.id).isNotNull
         UuidAsserter.assertThat(actualTodo.id).isUuid()
         assertThat(actualTodo).usingRecursiveComparison().ignoringFields("id").isEqualTo(givenTodo)
+    }
+
+    @Test
+    fun `getAllTodos - no todos stored - empty list returned`() {
+        val actualTodos = todoService.getAll()
+
+        assertThat(actualTodos).isEmpty()
+    }
+
+    @Test
+    fun `getAllTodos - one todo present - list with todo returned`() {
+        todoRepository.persist(createTodo1WithAttributesKnownInRequest())
+
+        val actualTodos = todoService.getAll()
+
+        assertThat(actualTodos).hasSize(1)
     }
 }

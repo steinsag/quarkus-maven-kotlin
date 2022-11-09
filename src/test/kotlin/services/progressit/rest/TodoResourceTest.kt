@@ -15,13 +15,13 @@ import org.mockito.kotlin.whenever
 import services.progressit.domain.TodoService
 import services.progressit.domain.model.Todo
 import services.progressit.rest.dto.TodoDto
-import services.progressit.test.TODO_1_ID
-import services.progressit.test.TODO_BASE_PATH
 import services.progressit.test.asserter.TodoResponseAsserter
-import services.progressit.test.createGetAll
-import services.progressit.test.createTodo1
-import services.progressit.test.createTodo1RequestDto
-import services.progressit.test.createTodo1WithAttributesKnownInRequest
+import services.progressit.test.data.TODO_1_ID
+import services.progressit.test.data.TODO_BASE_PATH
+import services.progressit.test.data.createGetAll
+import services.progressit.test.data.createTodo1
+import services.progressit.test.data.createTodo1RequestDto
+import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
 import javax.enterprise.inject.Default
 import javax.ws.rs.core.MediaType.APPLICATION_JSON
 

@@ -4,13 +4,13 @@ import io.restassured.http.ContentType.JSON
 import io.restassured.response.ValidatableResponse
 import org.hamcrest.Matchers.endsWith
 import org.hamcrest.core.Is.`is`
-import services.progressit.test.TODO_1_DEADLINE_STRING
-import services.progressit.test.TODO_1_DESCRIPTION
-import services.progressit.test.TODO_1_TITLE
-import services.progressit.test.TODO_2_DEADLINE_STRING
-import services.progressit.test.TODO_2_DESCRIPTION
-import services.progressit.test.TODO_2_TITLE
-import services.progressit.test.TODO_BASE_PATH
+import services.progressit.test.data.TODO_1_DEADLINE_STRING
+import services.progressit.test.data.TODO_1_DESCRIPTION
+import services.progressit.test.data.TODO_1_TITLE
+import services.progressit.test.data.TODO_2_DEADLINE_STRING
+import services.progressit.test.data.TODO_2_DESCRIPTION
+import services.progressit.test.data.TODO_2_TITLE
+import services.progressit.test.data.TODO_BASE_PATH
 
 private const val HEADER_LOCATION = "LOCATION"
 private const val UUID_LENGTH = 36
