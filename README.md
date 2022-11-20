@@ -1,61 +1,75 @@
-# quarkus-maven-kotlin Project
+# Testing in Quarkus
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project applies a complete test strategy to a Quarkus application.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Dev Mode
 
-## Running the application in dev mode
+In dev mode, database container is started automatically, so no manual setup is required.
 
-You can run your application in dev mode that enables live coding using:
 ```shell script
-./mvnw compile quarkus:dev
+mvn compile quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## Packaging & running
 
-## Packaging and running the application
+### Preparation
 
-The application can be packaged using:
+For all packages, DB settings must be specified as environment variables before starting the application.
+
 ```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+export QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgres:5432/todo
+export QUARKUS_DATASOURCE_USERNAME=postgres
+export QUARKUS_DATASOURCE_PASSWORD=postgres
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+To start a local database server, the following can be used:
 
-## Creating a native executable
-
-You can create a native executable using: 
 ```shell script
-./mvnw package -Pnative
+cd src/main/docker/local-setup
+docker compose up postgres
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+### Package & run as JAR
+
 ```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
+mvn package
+
+java -jar target/quarkus-app/quarkus-run.jar
 ```
 
-You can then execute your native executable with: `./target/quarkus-maven-kotlin-1.0.0-SNAPSHOT-runner`
+### Package & run as über-JAR
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+```shell script
+mvn package -Dquarkus.package.type=uber-jar
 
-## Related Guides
+java -jar target/*-runner.jar
+```
 
-- Hibernate ORM with Panache and Kotlin ([guide](https://quarkus.io/guides/hibernate-orm-panache-kotlin)): Define your persistent model in Hibernate ORM with Panache
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing JAX-RS and more
+### Package & run as native image
 
-## Provided Code
+```shell script
+mvn package -Pnative -Dquarkus.native.container-build=true
 
-### RESTEasy JAX-RS
+./target/quarkus-maven-kotlin-1.0.0-SNAPSHOT-runner 
+```
 
-Easily start your RESTful Web Services
+### Package & run native build in Docker container
 
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+In `src/main/docker/local-setup/docker-compose.yml` a Docker Compose file is provided to run the native build in a
+container.
+
+This also starts a Postgres container. The native image must be build beforehand via Maven.
+
+```shell script
+mvn package -Pnative -Dquarkus.native.container-build=true
+
+docker compose -f src/main/docker/local-setup/docker-compose.yml build
+docker compose -f src/main/docker/local-setup/docker-compose.yml up
+``` 
+
+## Important endpoints
+
+* http://localhost:8080/todos/ - API base
+* http://localhost:8080/q/dev/ - Dev UI (dev mode only)
+* http://localhost:8080/q/metrics/ - Metrics
+* http://localhost:8080/q/swagger-ui/ - Swagger UI
