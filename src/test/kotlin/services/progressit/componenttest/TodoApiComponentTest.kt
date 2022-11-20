@@ -2,6 +2,7 @@ package services.progressit.componenttest
 
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import services.progressit.rest.dto.TodoDto
 import services.progressit.test.CleanDatabaseAfterEach
@@ -10,6 +11,7 @@ import services.progressit.test.asserter.TodoResponseAsserter
 import services.progressit.test.data.TODO_BASE_PATH
 import services.progressit.test.data.createTodo1RequestDto
 import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
+import services.progressit.test.data.createTodo2RequestDto
 import javax.inject.Inject
 import javax.transaction.Transactional
 import javax.ws.rs.core.MediaType.APPLICATION_JSON
@@ -32,6 +34,43 @@ class TodoApiComponentTest : CleanDatabaseAfterEach() {
             TodoResponseAsserter.extractTodoId(actualResponse),
             createTodo1WithAttributesKnownInRequest()
         )
+    }
+
+    @Test
+    fun `get - todo with given id exists - returns todo`() {
+        val givenTodoId = createTodo().id!!
+
+        val actualResponse = getTodoById(givenTodoId)
+
+        TodoResponseAsserter.assertGetResponse(actualResponse, givenTodoId)
+    }
+
+    @Test
+    fun `getAll - several todos present - returns list of todos`() {
+        val givenTodo1 = createTodo(createTodo1RequestDto())
+        val givenTodo2 = createTodo(createTodo2RequestDto())
+        assertThat(givenTodo1.id).isNotEqualTo(givenTodo2.id)
+
+        val actualResponse = getAllTodos()
+
+        TodoResponseAsserter.assertGetAllResponse(actualResponse, listOf(givenTodo1, givenTodo2))
+    }
+
+    private fun getTodoById(givenTodoId: String) = given()
+        .get("/$TODO_BASE_PATH/$givenTodoId")
+        .then()
+
+    private fun getAllTodos() = given()
+        .get("/$TODO_BASE_PATH")
+        .then()
+
+    private fun createTodo(todoDto: TodoDto = createTodo1RequestDto()): TodoDto {
+        val response = postTodo(todoDto)
+
+        val todoId = TodoResponseAsserter.extractTodoId(response)
+        assertThat(todoId).isNotNull
+
+        return todoDto.copy(id = todoId)
     }
 
     private fun postTodo(givenTodoDto: TodoDto) = given()

@@ -1,39 +1,44 @@
 package services.progressit.test.asserter
 
-import io.restassured.http.ContentType.JSON
 import io.restassured.response.ValidatableResponse
 import org.hamcrest.Matchers.endsWith
 import org.hamcrest.core.Is.`is`
+import services.progressit.rest.dto.TodoDto
 import services.progressit.test.data.TODO_1_DEADLINE_STRING
 import services.progressit.test.data.TODO_1_DESCRIPTION
+import services.progressit.test.data.TODO_1_ID
 import services.progressit.test.data.TODO_1_TITLE
-import services.progressit.test.data.TODO_2_DEADLINE_STRING
-import services.progressit.test.data.TODO_2_DESCRIPTION
-import services.progressit.test.data.TODO_2_TITLE
 import services.progressit.test.data.TODO_BASE_PATH
+import javax.ws.rs.core.HttpHeaders.CONTENT_TYPE
+import javax.ws.rs.core.MediaType.APPLICATION_JSON
 
 private const val HEADER_LOCATION = "LOCATION"
 private const val UUID_LENGTH = 36
 
 object TodoResponseAsserter {
 
-    fun assertGetAllResponse(actualResponse: ValidatableResponse) {
+    fun assertGetAllResponse(
+        actualResponse: ValidatableResponse,
+        expectedTodos: List<TodoDto>
+    ) {
         actualResponse
             .statusCode(200)
-            .contentType(JSON)
-            .body("$.size()", `is`(2))
-            .body("[0].title", `is`(TODO_1_TITLE))
-            .body("[0].description", `is`(TODO_1_DESCRIPTION))
-            .body("[0].deadline", `is`(TODO_1_DEADLINE_STRING))
-            .body("[1].title", `is`(TODO_2_TITLE))
-            .body("[1].description", `is`(TODO_2_DESCRIPTION))
-            .body("[1].deadline", `is`(TODO_2_DEADLINE_STRING))
+            .header(CONTENT_TYPE, APPLICATION_JSON)
+            .body("$.size()", `is`(expectedTodos.size))
+
+        expectedTodos.forEachIndexed { index, expectedTodo ->
+            actualResponse
+                .body("[$index].id", `is`(expectedTodo.id))
+                .body("[$index].title", `is`(expectedTodo.title))
+                .body("[$index].description", `is`(expectedTodo.description))
+                .body("[$index].deadline", `is`(expectedTodo.deadline.toString()))
+        }
     }
 
     fun assertEmptyGetAllResponse(actualResponse: ValidatableResponse) {
         actualResponse
             .statusCode(200)
-            .contentType(JSON)
+            .header(CONTENT_TYPE, APPLICATION_JSON)
             .body("$.size()", `is`(0))
     }
 
@@ -52,4 +57,19 @@ object TodoResponseAsserter {
 
     fun extractTodoId(actualResponse: ValidatableResponse) =
         actualResponse.extract().header(HEADER_LOCATION).takeLast(UUID_LENGTH)
+
+    fun assertGetResponse(actualResponse: ValidatableResponse, expectedTodoId: String = TODO_1_ID) {
+        actualResponse
+            .statusCode(200)
+            .header(CONTENT_TYPE, APPLICATION_JSON)
+            .body("id", `is`(expectedTodoId))
+            .body("title", `is`(TODO_1_TITLE))
+            .body("description", `is`(TODO_1_DESCRIPTION))
+            .body("deadline", `is`(TODO_1_DEADLINE_STRING))
+    }
+
+    fun assertNotFoundResponse(actualResponse: ValidatableResponse) {
+        actualResponse
+            .statusCode(404)
+    }
 }

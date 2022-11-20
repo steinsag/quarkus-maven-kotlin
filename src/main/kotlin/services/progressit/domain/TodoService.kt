@@ -13,6 +13,8 @@ class TodoService {
     @Inject
     protected lateinit var todoRepository: TodoRepository
 
+    fun get(id: String): Todo? = todoRepository.findById(id)
+
     fun getAll() = todoRepository.findAll().list()
 
     fun create(todo: Todo): Todo {
