@@ -4,7 +4,7 @@ import io.restassured.response.ValidatableResponse
 import org.hamcrest.Matchers.endsWith
 import org.hamcrest.core.Is.`is`
 import services.progressit.rest.dto.TodoDto
-import services.progressit.test.data.TODO_1_DEADLINE_STRING
+import services.progressit.test.data.TODO_1_DEADLINE
 import services.progressit.test.data.TODO_1_DESCRIPTION
 import services.progressit.test.data.TODO_1_ID
 import services.progressit.test.data.TODO_1_TITLE
@@ -31,7 +31,9 @@ object TodoResponseAsserter {
                 .body("[$index].id", `is`(expectedTodo.id))
                 .body("[$index].title", `is`(expectedTodo.title))
                 .body("[$index].description", `is`(expectedTodo.description))
-                .body("[$index].deadline", `is`(expectedTodo.deadline.toString()))
+
+            val actualDeadline = actualResponse.extract().path<String>("[$index].deadline")
+            OffsetDateTimeAsserter.assertThat(actualDeadline).isEqualTo(expectedTodo.deadline)
         }
     }
 
@@ -65,7 +67,9 @@ object TodoResponseAsserter {
             .body("id", `is`(expectedTodoId))
             .body("title", `is`(TODO_1_TITLE))
             .body("description", `is`(TODO_1_DESCRIPTION))
-            .body("deadline", `is`(TODO_1_DEADLINE_STRING))
+
+        val actualDeadline = actualResponse.extract().path<String>("deadline")
+        OffsetDateTimeAsserter.assertThat(actualDeadline).isEqualTo(TODO_1_DEADLINE)
     }
 
     fun assertNotFoundResponse(actualResponse: ValidatableResponse) {
