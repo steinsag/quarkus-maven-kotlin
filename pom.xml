@@ -17,7 +17,7 @@
         <!-- Maven plugins -->
         <compiler-plugin.version>3.10.1</compiler-plugin.version>
         <surefire-plugin.version>3.0.0-M8</surefire-plugin.version>
-        <ktlint.maven.plugin.version>1.15.2</ktlint.maven.plugin.version>
+        <ktlint.maven.plugin.version>1.16.0</ktlint.maven.plugin.version>
 
         <!-- test dependencies -->
         <assertj.version>3.24.2</assertj.version>
