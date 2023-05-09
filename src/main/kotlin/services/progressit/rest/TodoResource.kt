@@ -1,12 +1,12 @@
 package services.progressit.rest
 
+import jakarta.inject.Inject
+import jakarta.ws.rs.NotFoundException
+import jakarta.ws.rs.Path
+import jakarta.ws.rs.core.Response
 import services.progressit.domain.TodoService
 import services.progressit.rest.dto.TodoDto
 import java.net.URI
-import javax.inject.Inject
-import javax.ws.rs.NotFoundException
-import javax.ws.rs.Path
-import javax.ws.rs.core.Response
 
 private const val TODO_BASE_PATH = "todos"
 

@@ -2,6 +2,9 @@ package services.progressit.componenttest
 
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
+import jakarta.inject.Inject
+import jakarta.transaction.Transactional
+import jakarta.ws.rs.core.MediaType.APPLICATION_JSON
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import services.progressit.rest.dto.TodoDto
@@ -12,9 +15,6 @@ import services.progressit.test.data.TODO_BASE_PATH
 import services.progressit.test.data.createTodo1RequestDto
 import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
 import services.progressit.test.data.createTodo2RequestDto
-import javax.inject.Inject
-import javax.transaction.Transactional
-import javax.ws.rs.core.MediaType.APPLICATION_JSON
 
 @QuarkusTest
 @Transactional

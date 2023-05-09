@@ -11,7 +11,7 @@
         <maven.compiler.release>17</maven.compiler.release>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.version>2.16.6.Final</quarkus.platform.version>
+        <quarkus.platform.version>3.0.2.Final</quarkus.platform.version>
         <kotlin.version>1.8.21</kotlin.version>
 
         <!-- Maven plugins -->
@@ -205,9 +205,9 @@
                         <plugin>all-open</plugin>
                     </compilerPlugins>
                     <pluginOptions>
-                        <option>all-open:annotation=javax.persistence.Entity</option>
-                        <option>all-open:annotation=javax.ws.rs.Path</option>
-                        <option>all-open:annotation=javax.enterprise.context.ApplicationScoped</option>
+                        <option>all-open:annotation=jakarta.persistence.Entity</option>
+                        <option>all-open:annotation=jakarta.ws.rs.Path</option>
+                        <option>all-open:annotation=jakarta.enterprise.context.ApplicationScoped</option>
                         <option>all-open:annotation=io.quarkus.test.junit.QuarkusTest</option>
                     </pluginOptions>
                 </configuration>

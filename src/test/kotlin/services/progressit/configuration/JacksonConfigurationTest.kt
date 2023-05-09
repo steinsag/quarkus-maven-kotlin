@@ -2,11 +2,11 @@ package services.progressit.configuration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.quarkus.test.junit.QuarkusTest
+import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.OffsetDateTime
 import java.time.temporal.ChronoUnit.MILLIS
-import javax.inject.Inject
 
 @QuarkusTest
 class JacksonConfigurationTest {

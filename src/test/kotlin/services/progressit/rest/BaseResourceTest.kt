@@ -3,9 +3,9 @@ package services.progressit.rest
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.RestAssured
 import io.restassured.config.ObjectMapperConfig
+import jakarta.inject.Inject
 import org.junit.jupiter.api.BeforeEach
 import java.lang.reflect.Type
-import javax.inject.Inject
 
 open class BaseResourceTest {
 

@@ -1,10 +1,10 @@
 package services.progressit.domain.model
 
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
 import org.hibernate.annotations.GenericGenerator
 import java.time.OffsetDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 
 private const val UUID_GENERATOR_ID = "UUID"
 
