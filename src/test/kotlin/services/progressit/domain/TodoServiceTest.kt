@@ -1,6 +1,8 @@
 package services.progressit.domain
 
 import io.quarkus.test.junit.QuarkusTest
+import jakarta.inject.Inject
+import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import services.progressit.domain.model.Todo
@@ -9,8 +11,6 @@ import services.progressit.test.asserter.DatabaseAsserter
 import services.progressit.test.asserter.UuidAsserter
 import services.progressit.test.data.TODO_1_ID
 import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
-import javax.inject.Inject
-import javax.transaction.Transactional
 
 @QuarkusTest
 @Transactional

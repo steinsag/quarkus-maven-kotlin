@@ -1,8 +1,8 @@
 package services.progressit.test
 
+import jakarta.inject.Inject
 import org.junit.jupiter.api.AfterEach
 import services.progressit.domain.persistence.TodoRepository
-import javax.inject.Inject
 
 open class CleanDatabaseAfterEach {
 

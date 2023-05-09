@@ -1,11 +1,11 @@
 package services.progressit.test.asserter
 
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 import services.progressit.domain.model.Todo
 import services.progressit.domain.persistence.TodoRepository
 import java.time.OffsetDateTime
-import javax.enterprise.context.ApplicationScoped
-import javax.inject.Inject
 
 private const val HIBERNATE_ATTRIBUTES_IGNORE_PATTERN = "\\\$\\\$_hibernate_.*"
 

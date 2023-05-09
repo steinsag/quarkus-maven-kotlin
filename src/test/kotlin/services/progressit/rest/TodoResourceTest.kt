@@ -3,6 +3,10 @@ package services.progressit.rest
 import io.quarkus.test.junit.QuarkusTest
 import io.quarkus.test.junit.mockito.InjectMock
 import io.restassured.RestAssured.given
+import jakarta.enterprise.inject.Default
+import jakarta.ws.rs.core.HttpHeaders.ACCEPT
+import jakarta.ws.rs.core.MediaType.APPLICATION_JSON
+import jakarta.ws.rs.core.MediaType.APPLICATION_XML
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
@@ -26,10 +30,6 @@ import services.progressit.test.data.createTodo1ResponseDto
 import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
 import services.progressit.test.data.createTodo2
 import services.progressit.test.data.createTodo2ResponseDto
-import javax.enterprise.inject.Default
-import javax.ws.rs.core.HttpHeaders.ACCEPT
-import javax.ws.rs.core.MediaType.APPLICATION_JSON
-import javax.ws.rs.core.MediaType.APPLICATION_XML
 
 @QuarkusTest
 class TodoResourceTest : BaseResourceTest() {

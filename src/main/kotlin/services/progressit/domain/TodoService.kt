@@ -1,10 +1,10 @@
 package services.progressit.domain
 
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Inject
+import jakarta.transaction.Transactional
 import services.progressit.domain.model.Todo
 import services.progressit.domain.persistence.TodoRepository
-import javax.enterprise.context.ApplicationScoped
-import javax.inject.Inject
-import javax.transaction.Transactional
 
 @Transactional
 @ApplicationScoped

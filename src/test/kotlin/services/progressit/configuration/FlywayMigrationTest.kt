@@ -1,10 +1,10 @@
 package services.progressit.configuration
 
 import io.quarkus.test.junit.QuarkusTest
+import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
 import org.flywaydb.core.Flyway
 import org.junit.jupiter.api.Test
-import javax.inject.Inject
 
 @QuarkusTest
 class FlywayMigrationTest {

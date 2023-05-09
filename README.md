@@ -17,7 +17,7 @@ mvn compile quarkus:dev
 For all packages, DB settings must be specified as environment variables before starting the application.
 
 ```shell script
-export QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgres:5432/todo
+export QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://localhost:5432/todo
 export QUARKUS_DATASOURCE_USERNAME=postgres
 export QUARKUS_DATASOURCE_PASSWORD=postgres
 ```

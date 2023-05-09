@@ -1,6 +1,8 @@
 package services.progressit.test.asserter
 
 import io.restassured.response.ValidatableResponse
+import jakarta.ws.rs.core.HttpHeaders.CONTENT_TYPE
+import jakarta.ws.rs.core.MediaType.APPLICATION_JSON
 import org.hamcrest.Matchers.endsWith
 import org.hamcrest.core.Is.`is`
 import services.progressit.rest.dto.TodoDto
@@ -9,8 +11,6 @@ import services.progressit.test.data.TODO_1_DESCRIPTION
 import services.progressit.test.data.TODO_1_ID
 import services.progressit.test.data.TODO_1_TITLE
 import services.progressit.test.data.TODO_BASE_PATH
-import javax.ws.rs.core.HttpHeaders.CONTENT_TYPE
-import javax.ws.rs.core.MediaType.APPLICATION_JSON
 
 private const val HEADER_LOCATION = "LOCATION"
 private const val UUID_LENGTH = 36
