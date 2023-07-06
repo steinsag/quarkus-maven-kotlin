@@ -12,7 +12,7 @@
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.version>3.2.0.Final</quarkus.platform.version>
-        <kotlin.version>1.8.22</kotlin.version>
+        <kotlin.version>1.9.0</kotlin.version>
 
         <!-- Maven plugins -->
         <compiler-plugin.version>3.11.0</compiler-plugin.version>
