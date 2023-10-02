@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test
 
 @QuarkusTest
 class HealthEndpointTest {
-
     @Test
     fun testHealthEndpoint() {
         When {

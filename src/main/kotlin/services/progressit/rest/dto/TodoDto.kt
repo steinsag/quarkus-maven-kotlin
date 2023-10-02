@@ -10,17 +10,19 @@ data class TodoDto(
     val deadline: OffsetDateTime
 ) {
     companion object {
-        fun toDomain(todoDto: TodoDto) = Todo().apply {
-            title = todoDto.title
-            description = todoDto.description
-            deadline = todoDto.deadline
-        }
+        fun toDomain(todoDto: TodoDto) =
+            Todo().apply {
+                title = todoDto.title
+                description = todoDto.description
+                deadline = todoDto.deadline
+            }
 
-        fun fromDomain(todo: Todo) = TodoDto(
-            id = todo.id,
-            title = todo.title,
-            description = todo.description,
-            deadline = todo.deadline
-        )
+        fun fromDomain(todo: Todo) =
+            TodoDto(
+                id = todo.id,
+                title = todo.title,
+                description = todo.description,
+                deadline = todo.deadline
+            )
     }
 }

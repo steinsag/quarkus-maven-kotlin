@@ -33,14 +33,12 @@ import services.progressit.test.data.createTodo2ResponseDto
 
 @QuarkusTest
 class TodoResourceTest : BaseResourceTest() {
-
     @InjectMock
-    @field: Default
+    @field:Default
     lateinit var todoService: TodoService
 
     @Nested
     inner class Get {
-
         @Test
         fun `get - todo with given id exists - returns todo`() {
             whenever(todoService.get(TODO_1_ID)).thenReturn(createTodo1())
@@ -83,16 +81,16 @@ class TodoResourceTest : BaseResourceTest() {
             actualResponse.statusCode(500)
         }
 
-        private fun requestTodoById(id: String) = given()
-            .header(ACCEPT, APPLICATION_JSON)
-            .`when`()
-            .get("/$TODO_BASE_PATH/$id")
-            .then()
+        private fun requestTodoById(id: String) =
+            given()
+                .header(ACCEPT, APPLICATION_JSON)
+                .`when`()
+                .get("/$TODO_BASE_PATH/$id")
+                .then()
     }
 
     @Nested
     inner class GetAll {
-
         @Test
         fun `getAll - several todos present - returns list of todos`() {
             val givenTodos = listOf(createTodo1(), createTodo2())
@@ -138,15 +136,15 @@ class TodoResourceTest : BaseResourceTest() {
             actualResponse.statusCode(500)
         }
 
-        private fun requestAllTodos() = given()
-            .`when`()
-            .get("/$TODO_BASE_PATH")
-            .then()
+        private fun requestAllTodos() =
+            given()
+                .`when`()
+                .get("/$TODO_BASE_PATH")
+                .then()
     }
 
     @Nested
     inner class Create {
-
         private lateinit var todoCaptor: KArgumentCaptor<Todo>
 
         @BeforeEach
@@ -200,10 +198,11 @@ class TodoResourceTest : BaseResourceTest() {
             actualResponse.statusCode(500)
         }
 
-        private fun postTodo(givenTodoDto: TodoDto) = given()
-            .contentType(APPLICATION_JSON)
-            .body(givenTodoDto)
-            .post("/$TODO_BASE_PATH")
-            .then()
+        private fun postTodo(givenTodoDto: TodoDto) =
+            given()
+                .contentType(APPLICATION_JSON)
+                .body(givenTodoDto)
+                .post("/$TODO_BASE_PATH")
+                .then()
     }
 }

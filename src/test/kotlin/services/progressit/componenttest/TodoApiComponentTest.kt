@@ -19,7 +19,6 @@ import services.progressit.test.data.createTodo2RequestDto
 @QuarkusTest
 @Transactional
 class TodoApiComponentTest : CleanDatabaseAfterEach() {
-
     @Inject
     lateinit var databaseAsserter: DatabaseAsserter
 
@@ -56,13 +55,15 @@ class TodoApiComponentTest : CleanDatabaseAfterEach() {
         TodoResponseAsserter.assertGetAllResponse(actualResponse, listOf(givenTodo1, givenTodo2))
     }
 
-    private fun getTodoById(givenTodoId: String) = given()
-        .get("/$TODO_BASE_PATH/$givenTodoId")
-        .then()
+    private fun getTodoById(givenTodoId: String) =
+        given()
+            .get("/$TODO_BASE_PATH/$givenTodoId")
+            .then()
 
-    private fun getAllTodos() = given()
-        .get("/$TODO_BASE_PATH")
-        .then()
+    private fun getAllTodos() =
+        given()
+            .get("/$TODO_BASE_PATH")
+            .then()
 
     private fun createTodo(todoDto: TodoDto = createTodo1RequestDto()): TodoDto {
         val response = postTodo(todoDto)
@@ -73,9 +74,10 @@ class TodoApiComponentTest : CleanDatabaseAfterEach() {
         return todoDto.copy(id = todoId)
     }
 
-    private fun postTodo(givenTodoDto: TodoDto) = given()
-        .contentType(APPLICATION_JSON)
-        .body(givenTodoDto)
-        .post("/$TODO_BASE_PATH")
-        .then()
+    private fun postTodo(givenTodoDto: TodoDto) =
+        given()
+            .contentType(APPLICATION_JSON)
+            .body(givenTodoDto)
+            .post("/$TODO_BASE_PATH")
+            .then()
 }
