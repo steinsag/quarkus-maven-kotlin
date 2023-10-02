@@ -15,7 +15,6 @@ import services.progressit.test.data.createTodo1WithAttributesKnownInRequest
 @QuarkusTest
 @Transactional
 class TodoServiceTest : CleanDatabaseAfterEach() {
-
     @Inject
     lateinit var todoService: TodoService
 
@@ -68,7 +67,10 @@ class TodoServiceTest : CleanDatabaseAfterEach() {
         databaseAsserter.assertTodoEntity(actualTodo.id!!, createTodo1WithAttributesKnownInRequest())
     }
 
-    private fun assertServiceResponse(actualTodo: Todo, givenTodo: Todo) {
+    private fun assertServiceResponse(
+        actualTodo: Todo,
+        givenTodo: Todo
+    ) {
         assertThat(actualTodo.id).isNotNull
         UuidAsserter.assertThat(actualTodo.id).isUuid()
         assertThat(actualTodo).usingRecursiveComparison().ignoringFields("id").isEqualTo(givenTodo)

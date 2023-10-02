@@ -7,7 +7,6 @@ import jakarta.inject.Singleton
 
 @Singleton
 class JacksonConfiguration : ObjectMapperCustomizer {
-
     override fun customize(objectMapper: ObjectMapper?) {
         objectMapper?.disable(ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
     }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach
 import services.progressit.domain.persistence.TodoRepository
 
 open class CleanDatabaseAfterEach {
-
     @Inject
     lateinit var todoRepository: TodoRepository
 

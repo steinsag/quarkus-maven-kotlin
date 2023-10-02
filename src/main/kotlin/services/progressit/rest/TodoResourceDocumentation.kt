@@ -15,11 +15,12 @@ import services.progressit.rest.dto.TodoDto
 @Consumes(APPLICATION_JSON)
 @Produces(APPLICATION_JSON)
 abstract class TodoResourceDocumentation {
-
     @Operation(summary = "Get todo by ID")
     @GET
     @Path("/{id}")
-    abstract fun get(@PathParam id: String): TodoDto
+    abstract fun get(
+        @PathParam id: String
+    ): TodoDto
 
     @GET
     abstract fun getAll(): List<TodoDto>

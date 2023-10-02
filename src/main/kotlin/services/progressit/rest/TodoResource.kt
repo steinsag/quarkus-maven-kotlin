@@ -12,14 +12,14 @@ private const val TODO_BASE_PATH = "todos"
 
 @Path("/$TODO_BASE_PATH")
 class TodoResource : TodoResourceDocumentation() {
-
     @Inject
     lateinit var todoService: TodoService
 
-    override fun get(id: String): TodoDto = when (val todo = todoService.get(id)) {
-        null -> throw NotFoundException("Todo with ID $id not found")
-        else -> TodoDto.fromDomain(todo)
-    }
+    override fun get(id: String) =
+        when (val todo = todoService.get(id)) {
+            null -> throw NotFoundException("Todo with ID $id not found")
+            else -> TodoDto.fromDomain(todo)
+        }
 
     override fun getAll() = todoService.getAll().map { TodoDto.fromDomain(it) }
 

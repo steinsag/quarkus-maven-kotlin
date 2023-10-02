@@ -16,7 +16,6 @@ private const val HEADER_LOCATION = "LOCATION"
 private const val UUID_LENGTH = 36
 
 object TodoResponseAsserter {
-
     fun assertGetAllResponse(
         actualResponse: ValidatableResponse,
         expectedTodos: List<TodoDto>
@@ -44,7 +43,10 @@ object TodoResponseAsserter {
             .body("$.size()", `is`(0))
     }
 
-    fun assertCreateResponse(actualResponse: ValidatableResponse, expectedTodoId: String) {
+    fun assertCreateResponse(
+        actualResponse: ValidatableResponse,
+        expectedTodoId: String
+    ) {
         actualResponse
             .statusCode(201)
             .header(HEADER_LOCATION, endsWith("/$TODO_BASE_PATH/$expectedTodoId"))
@@ -60,7 +62,10 @@ object TodoResponseAsserter {
     fun extractTodoId(actualResponse: ValidatableResponse) =
         actualResponse.extract().header(HEADER_LOCATION).takeLast(UUID_LENGTH)
 
-    fun assertGetResponse(actualResponse: ValidatableResponse, expectedTodoId: String = TODO_1_ID) {
+    fun assertGetResponse(
+        actualResponse: ValidatableResponse,
+        expectedTodoId: String = TODO_1_ID
+    ) {
         actualResponse
             .statusCode(200)
             .header(CONTENT_TYPE, APPLICATION_JSON)

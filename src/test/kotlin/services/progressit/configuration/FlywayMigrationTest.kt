@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test
 
 @QuarkusTest
 class FlywayMigrationTest {
-
     @Suppress("CdiInjectionPointsInspection")
     @Inject
     lateinit var flyway: Flyway

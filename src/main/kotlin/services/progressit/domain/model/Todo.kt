@@ -10,7 +10,6 @@ private const val UUID_GENERATOR_ID = "UUID"
 
 @Entity
 class Todo {
-
     @Id
     @GeneratedValue(generator = UUID_GENERATOR_ID)
     @GenericGenerator(
