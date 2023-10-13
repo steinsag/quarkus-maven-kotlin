@@ -24,5 +24,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Submit Dependency Snapshot
-      uses: advanced-security/maven-dependency-submission-action@v3
+    - name: Maven Dependency Tree Dependency Submission
+      uses: advanced-security/maven-dependency-submission-action@v3.0.2
+            
