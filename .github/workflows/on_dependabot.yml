@@ -1,8 +1,6 @@
 name: Dependabot Pull Request
 on:
   pull_request:
-    branches:
-      - dependabot/**
     types:
       - opened
       - reopened
@@ -14,9 +12,12 @@ permissions:
 
 jobs:
   pipeline:
+    if: startsWith(github.head_ref, 'dependabot/')
     uses: ./.github/workflows/job_ci.yml
 
   dependabot-auto-merge:
+    needs:
+      - pipeline
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
