@@ -20,7 +20,7 @@
         <ktlint.maven.plugin.version>3.0.0</ktlint.maven.plugin.version>
 
         <!-- test dependencies -->
-        <assertj.version>3.25.1</assertj.version>
+        <assertj.version>3.25.2</assertj.version>
         <mockito.kotlin.version>5.2.1</mockito.kotlin.version>
 
         <!-- settings -->
