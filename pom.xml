@@ -16,7 +16,7 @@
 
         <!-- Maven plugins -->
         <compiler-plugin.version>3.13.0</compiler-plugin.version>
-        <surefire-plugin.version>3.5.1</surefire-plugin.version>
+        <surefire-plugin.version>3.5.2</surefire-plugin.version>
         <ktlint.maven.plugin.version>3.2.0</ktlint.maven.plugin.version>
 
         <!-- test dependencies -->
