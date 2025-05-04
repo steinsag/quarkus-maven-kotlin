@@ -18,7 +18,7 @@ class JacksonConfigurationTest {
 
     @Test
     fun `deserialize JSON - timestamp given - not converted to UTC`() {
-        val givenJson = "{\"timestamp\": \"${timestampWithTimezoneAsString}\"}"
+        val givenJson = """{"timestamp": "$timestampWithTimezoneAsString"}"""
 
         val actualDto = objectMapper.readValue(givenJson, TestDto::class.java)
 

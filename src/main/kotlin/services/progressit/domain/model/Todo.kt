@@ -9,6 +9,7 @@ import java.time.OffsetDateTime
 private const val UUID_GENERATOR_ID = "UUID"
 
 @Entity
+@Suppress("LateinitUsage")
 class Todo {
     @Id
     @GeneratedValue(generator = UUID_GENERATOR_ID)

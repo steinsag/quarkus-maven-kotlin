@@ -6,11 +6,12 @@ import java.time.OffsetDateTime
 
 class OffsetDateTimeAsserter(actual: OffsetDateTime) :
     AbstractAssert<OffsetDateTimeAsserter, OffsetDateTime>(actual, OffsetDateTimeAsserter::class.java) {
-    companion object {
-        fun assertThat(actual: String) = OffsetDateTimeAsserter(OffsetDateTime.parse(actual))
-    }
 
     fun isEqualTo(expected: OffsetDateTime) {
         Assertions.assertThat(actual).usingDefaultComparator().isEqualTo(expected)
+    }
+
+    companion object {
+        fun assertThat(actual: String) = OffsetDateTimeAsserter(OffsetDateTime.parse(actual))
     }
 }

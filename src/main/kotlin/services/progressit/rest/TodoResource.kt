@@ -13,6 +13,7 @@ private const val TODO_BASE_PATH = "todos"
 @Path("/$TODO_BASE_PATH")
 class TodoResource : TodoResourceDocumentation() {
     @Inject
+    @Suppress("LateinitUsage")
     lateinit var todoService: TodoService
 
     override fun get(id: String) =

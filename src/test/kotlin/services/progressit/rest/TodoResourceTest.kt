@@ -172,7 +172,8 @@ class TodoResourceTest : BaseResourceTest() {
                 .contentType(APPLICATION_JSON)
                 .body("invalid json")
                 .post("/$TODO_BASE_PATH")
-                .then().statusCode(400)
+                .then()
+                .statusCode(400)
 
             verifyNoInteractions(todoService)
         }

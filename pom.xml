@@ -17,7 +17,7 @@
         <!-- Maven plugins -->
         <compiler-plugin.version>3.14.0</compiler-plugin.version>
         <surefire-plugin.version>3.5.3</surefire-plugin.version>
-        <ktlint.maven.plugin.version>3.2.0</ktlint.maven.plugin.version>
+        <detekt-plugin.version>1.23.8</detekt-plugin.version>
 
         <!-- test dependencies -->
         <assertj.version>3.27.3</assertj.version>
@@ -27,8 +27,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.parameters>true</maven.compiler.parameters>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -47,10 +47,6 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-kotlin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -227,17 +223,29 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.github.gantsign.maven</groupId>
-                <artifactId>ktlint-maven-plugin</artifactId>
-                <version>${ktlint.maven.plugin.version}</version>
+                <groupId>com.github.ozsie</groupId>
+                <artifactId>detekt-maven-plugin</artifactId>
+                <version>${detekt-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>detekt</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
+                        <configuration>
+                            <config>${project.basedir}/detekt.yml</config>
+                            <buildUponDefaultConfig>true</buildUponDefaultConfig>
+                        </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>io.gitlab.arturbosch.detekt</groupId>
+                        <artifactId>detekt-formatting</artifactId>
+                        <version>${detekt-plugin.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
