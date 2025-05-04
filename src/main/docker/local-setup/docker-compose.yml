@@ -10,12 +10,10 @@ services:
       retries: 6
     ports:
       - "5432:5432"
-    volumes:
-      - ./pg-init-scripts:/docker-entrypoint-initdb.d
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_MULTIPLE_DATABASES=todo
+      - POSTGRES_DB=todo
     networks:
       - quarkus
   quarkus-maven-kotlin:
@@ -32,7 +30,7 @@ services:
     ports:
       - "8080:8080"
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      test: [ "CMD", "curl", "--fail", "http://localhost:8080/health" ]
     environment:
       - QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgres:5432/todo
       - QUARKUS_DATASOURCE_USERNAME=postgres
