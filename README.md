@@ -47,8 +47,10 @@ java -jar target/*-runner.jar
 
 ### Package & run as native image
 
+Ensure to have GraalVM installed locally, e.g. by using [SDKMAN](https://sdkman.io/).
+
 ```shell script
-mvn package -Pnative -Dquarkus.native.container-build=true
+mvn package -Pnative
 
 ./target/quarkus-maven-kotlin-1.0.0-SNAPSHOT-runner 
 ```
