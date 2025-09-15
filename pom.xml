@@ -16,7 +16,7 @@
 
         <!-- Maven plugins -->
         <compiler-plugin.version>3.14.0</compiler-plugin.version>
-        <surefire-plugin.version>3.5.3</surefire-plugin.version>
+        <surefire-plugin.version>3.5.4</surefire-plugin.version>
         <detekt-plugin.version>1.23.8</detekt-plugin.version>
 
         <!-- test dependencies -->
