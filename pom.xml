@@ -15,7 +15,7 @@
         <kotlin.version>2.2.20</kotlin.version>
 
         <!-- Maven plugins -->
-        <compiler-plugin.version>3.14.0</compiler-plugin.version>
+        <compiler-plugin.version>3.14.1</compiler-plugin.version>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
         <detekt-plugin.version>1.23.8</detekt-plugin.version>
 
