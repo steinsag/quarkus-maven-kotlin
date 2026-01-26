@@ -20,7 +20,7 @@
         <detekt-plugin.version>1.23.8</detekt-plugin.version>
 
         <!-- test dependencies -->
-        <assertj.version>3.27.6</assertj.version>
+        <assertj.version>3.27.7</assertj.version>
         <mockito.kotlin.version>6.2.2</mockito.kotlin.version>
 
         <!-- settings -->
