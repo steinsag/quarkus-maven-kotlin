@@ -21,7 +21,7 @@
 
         <!-- test dependencies -->
         <assertj.version>3.27.7</assertj.version>
-        <mockito.kotlin.version>6.2.2</mockito.kotlin.version>
+        <mockito.kotlin.version>6.2.3</mockito.kotlin.version>
 
         <!-- settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
